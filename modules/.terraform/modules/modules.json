@@ -1,1 +1,0 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"acm","Source":"./modules/acm","Dir":""},{"Key":"alb-handling","Source":"./modules/alb-handling","Dir":""},{"Key":"ecs-service","Source":"./modules/ecs-service","Dir":""},{"Key":"iam","Source":"./modules/iam/","Dir":""}]}
