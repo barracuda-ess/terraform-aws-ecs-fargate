@@ -6,6 +6,8 @@ resource "aws_acm_certificate" "cert" {
 
   lifecycle {
     create_before_destroy = true
+    # Workaround: https://github.com/terraform-providers/terraform-provider-aws/issues/8531
+    ignore_changes = [subject_alternative_names]
   }
 
   tags = local.tags

@@ -34,6 +34,11 @@ EOF
   default = "ECS"
 }
 
+variable "load_balancing_properties_enabled" {
+  description = "Indicate if load-balancing is enabled"
+  default = false
+}
+
 variable "load_balancing_properties_lb_arn" {
   description = "The arn of the ALB or NLB being used"
   default     = ""
@@ -46,7 +51,8 @@ variable "load_balancing_properties_https_enabled" {
 
 variable "load_balancing_properties_cert_sans" {
   description = "SANS for ACM cert"
-  default = ""
+  type = list
+  default = []
 }
 
 variable "load_balancing_properties_route53_record_type" {

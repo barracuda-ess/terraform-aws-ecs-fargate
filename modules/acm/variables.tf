@@ -4,13 +4,15 @@ variable "https_enabled" {
 
 variable "cert_domain" {}
 
-variable "cert_sans" {}
+variable "cert_sans" {
+  type = list
+}
 
 variable "r53_zone_id" {}
 
 variable "tags" {
   description = "A map of tags to apply to all resources"
-  type        = map
+  type        = map(string)
   default     = {}
 }
 

@@ -6,13 +6,16 @@ locals {
     "Name" = "${local.ecs_cluster_name}-${var.name}"
   }
 
+  ssl_enabled = var.load_balancing_properties_https_enabled == 1 ? 1 : 0
+  lb_enabled = var.load_balancing_properties_enabled == 1 ? 1 : 0
+
   tags = merge(var.tags, local.name_map)
 }
 
 module "acm" {
   source = "./modules/acm"
 
-  https_enabled = var.load_balancing_properties_https_enabled ? 1 : 0
+  https_enabled = local.ssl_enabled
 
   cert_domain = var.load_balancing_properties_route53_custom_name
 
@@ -28,6 +31,10 @@ module "alb_handling" {
 
   name         = var.name
   cluster_name = local.ecs_cluster_name
+
+  lb_enabled = local.lb_enabled
+
+  ssl_enabled = local.ssl_enabled
 
   # lb_vpc_id sets the VPC ID of where the LB resides
   lb_vpc_id = var.load_balancing_properties_lb_vpc_id
@@ -47,10 +54,6 @@ module "alb_handling" {
 
   # Sets the deregistration_delay for the targetgroup
   deregistration_delay = var.load_balancing_properties_deregistration_delay
-
-  # route53_record_type sets the record type of the route53 record, can be ALIAS, CNAME or NONE,  defaults to ALIAS
-  # In case of NONE no record will be made
-  route53_record_type = var.load_balancing_properties_route53_record_type
 
   # Sets the zone in which the sub-domain will be added for this service
   route53_zone_id = var.load_balancing_properties_route53_zone_id

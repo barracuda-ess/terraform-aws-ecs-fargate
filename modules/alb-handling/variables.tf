@@ -1,4 +1,12 @@
-# The amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds. 
+variable "ssl_enabled" {
+  default = false
+}
+
+variable "lb_enabled" {
+  default = false
+}
+
+# The amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds.
 variable "deregistration_delay" {}
 
 # unhealthy_threshold defines the threashold for the target_group after which a service is seen as unhealthy.
@@ -68,18 +76,6 @@ variable "route53_zone_id" {
 variable "route53_name" {
   default = ""
 }
-
-# Small Lookup map to validate route53_record_type
-variable "allowed_record_types" {
-  default = {
-    ALIAS = "ALIAS"
-    CNAME = "CNAME"
-    NONE  = "NONE"
-  }
-}
-
-# route53_record_type, one of the allowed values of the map allowed_record_types
-variable "route53_record_type" {}
 
 variable "tags" {
   description = "A map of tags to apply to all resources"
