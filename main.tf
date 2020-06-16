@@ -120,7 +120,7 @@ module "ecs-service" {
   container_port = var.container_port
 
   # This way we force the aws_lb_listener_rule to have finished before creating the ecs_service
-  aws_lb_listener = module.alb_handling.lb_listener
+  aws_lb_listener = module.alb_handling.lb_listener_arn
 
   # https://aws.amazon.com/blogs/aws/amazon-ecs-service-discovery/
   # service_discovery_enabled defaults to false
